@@ -1,6 +1,15 @@
 import { Table } from "flowbite-react";
+import React from "react";
+import { trpc } from "../utils/trpc";
+import Skeleton from "./Skeleton";
 
 const FuelTable = () => {
+  const { data: entries, isLoading } = trpc.refuelEntries.getAll.useQuery();
+
+  if (isLoading) {
+    return <Skeleton />;
+  }
+
   return (
     <Table>
       <Table.Head>
@@ -8,60 +17,40 @@ const FuelTable = () => {
         <Table.HeadCell>Type drivstoff</Table.HeadCell>
         <Table.HeadCell>Antall liter</Table.HeadCell>
         <Table.HeadCell>Ny måler stand</Table.HeadCell>
+        <Table.HeadCell>Navn</Table.HeadCell>
         <Table.HeadCell>
           <span className="sr-only">Edit</span>
         </Table.HeadCell>
       </Table.Head>
       <Table.Body className="divide-y">
-        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            LN-YDM
-          </Table.Cell>
-          <Table.Cell>UL91</Table.Cell>
-          <Table.Cell>45</Table.Cell>
-          <Table.Cell>847194</Table.Cell>
-          <Table.Cell>
-            <a
-              href="/tables"
-              className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+        {entries
+          ?.map((entry, index) => (
+            <Table.Row
+              key={index}
+              className="bg-white dark:border-gray-700 dark:bg-gray-800"
             >
-              Edit
-            </a>
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            LN-DFK
-          </Table.Cell>
-          <Table.Cell>UL91</Table.Cell>
-          <Table.Cell>23</Table.Cell>
-          <Table.Cell>23235235</Table.Cell>
-          <Table.Cell>
-            <a
-              href="/tables"
-              className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-            >
-              Edit
-            </a>
-          </Table.Cell>
-        </Table.Row>
-        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-            LN-DFM
-          </Table.Cell>
-          <Table.Cell>UL91</Table.Cell>
-          <Table.Cell>12</Table.Cell>
-          <Table.Cell>23592359</Table.Cell>
-          <Table.Cell>
-            <a
-              href="/tables"
-              className="font-medium text-blue-600 hover:underline dark:text-blue-500"
-            >
-              Edit
-            </a>
-          </Table.Cell>
-        </Table.Row>
+              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                {entry.aircraft}
+              </Table.Cell>
+              <Table.Cell>UL91</Table.Cell>
+              <Table.Cell>{}</Table.Cell>
+              <Table.Cell>{entry.pumpValue}</Table.Cell>
+              <Table.Cell>{entry.name}</Table.Cell>
+              {index == entries.length - 1 && (
+                <Table.Cell>
+                  <a
+                    href="/tables"
+                    className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                  >
+                    Rediger
+                  </a>
+                </Table.Cell>
+              )}
+            </Table.Row>
+          ))
+          .reverse()}
       </Table.Body>
+      ;
     </Table>
   );
 };

@@ -2,12 +2,15 @@ import { z } from "zod";
 
 import { router, publicProcedure } from "../trpc";
 
-export const registerRouter = router({
+export const refuelRouter = router({
   submit: publicProcedure
     .input(
       z.object({
         aircraft: z.string(),
-        pumpValue: z.number(),
+        pumpValue: z.preprocess(
+          (a) => parseInt(z.string().parse(a), 10),
+          z.number().positive().max(100000)
+        ),
         name: z.string(),
       })
     )
@@ -22,4 +25,14 @@ export const registerRouter = router({
 
       return refuelEntry;
     }),
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.refuelEntry.findMany();
+  }),
+  getLastPumpValue: publicProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.refuelEntry.findFirst({
+      select: {
+        pumpValue: true,
+      },
+    });
+  }),
 });

@@ -5,8 +5,7 @@ const AircraftSelector = () => {
   const [aircraft, setAircraft] = useState<SelectedAircraft | undefined>(
     undefined
   );
-  
-  console.log(aircraft);
+
   return (
     <Dropdown label={aircraft ? aircraft : "Velg fly"}>
       <Dropdown.Item
@@ -33,11 +32,11 @@ const AircraftSelector = () => {
 };
 
 enum SelectedAircraft {
-    YDM = "LN-YDM",
-    DFK = "LN-DFK",
-    DFM = "LN-DFM",
-    DFL = "LN-DFL",
-    ANNET = "Annet",
-  }
+  YDM = "LN-YDM",
+  DFK = "LN-DFK",
+  DFM = "LN-DFM",
+  DFL = "LN-DFL",
+  ANNET = "Annet",
+}
 
 export default AircraftSelector;
