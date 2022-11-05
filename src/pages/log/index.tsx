@@ -1,6 +1,8 @@
+import { Table } from "flowbite-react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import FuelTable from "../../components/FuelTable";
+import PumpAnalytics from "../../components/PumpAnalytics";
 
 const Log: NextPage = () => {
   return (

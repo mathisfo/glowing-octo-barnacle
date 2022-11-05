@@ -19,6 +19,10 @@ const Topbar = () => {
         <Navbar.Link href="/register" active={router.asPath === "/register"}>
           Registrer
         </Navbar.Link>
+        <Navbar.Link
+          href="/pump"
+          active={router.asPath === "/pump"}
+        >Pumpehistorikk</Navbar.Link>
         <Navbar.Link href="/about" active={router.asPath === "/about"}>
           Om
         </Navbar.Link>

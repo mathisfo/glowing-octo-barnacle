@@ -64,3 +64,16 @@ model RefuelEntry {
   pumpValue Int
   name      String
 }
+
+model Pump {
+  pumpid String @id @default(cuid())
+  capacity Int
+  history PumpRefuelEntry[]
+}
+
+model PumpRefuelEntry {
+  id String @id @default(cuid())
+  refilledAt DateTime @default(now())
+  amountRefilled Int
+  pump Pump @relation(fields: [id], references: [pumpid], onDelete: Cascade)
+}

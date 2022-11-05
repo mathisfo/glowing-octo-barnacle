@@ -67,7 +67,7 @@ const RegisterFuel = () => {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label value="Ny måler stand i hele liter" />
+            <Label value="Ny målerstand i hele liter" />
           </div>
           <TextInput type="number" {...register("pumpValue")} required={true} />
         </div>

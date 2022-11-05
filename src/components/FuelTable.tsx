@@ -50,7 +50,6 @@ const FuelTable = () => {
           ))
           .reverse()}
       </Table.Body>
-      ;
     </Table>
   );
 };
