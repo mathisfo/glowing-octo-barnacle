@@ -6,11 +6,7 @@ module.exports = {
     "./public/**/*.html",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-      },
-    },
+    extend: {},
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin"), require("@tailwindcss/forms")],
 };

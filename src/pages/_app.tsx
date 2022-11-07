@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 
 import "../styles/globals.css";
-import Topbar from '../components/Topbar';
+import Topbar from "../components/Topbar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -13,8 +13,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Topbar/>
-        <Component {...pageProps} />
+      <Topbar />
+      <Component {...pageProps} />
     </SessionProvider>
   );
 };

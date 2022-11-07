@@ -22,7 +22,7 @@ const RegisterFuel = () => {
   const onSubmit: SubmitHandler<RefuelEntry> = (data) => {
     mutation.mutate(data, {
       onSuccess: () => {
-        router.push("/log");
+        router.push("/");
       },
     });
   };
@@ -46,7 +46,10 @@ const RegisterFuel = () => {
           </span>
         </Alert>
       )}
-      <form className="m-3 flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="m-3 flex flex-col gap-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div>
           <div id="select">
             <div className="mb-2 block">
